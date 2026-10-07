@@ -1,0 +1,11 @@
+{
+  "name": "anekdote-feed-instagram",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Feed Instagram Anekdote en HTML/CSS/JS et éditeur local de composition",
+  "scripts": {
+    "dev": "node scripts/serve.cjs",
+    "test": "node --test tests/model.test.cjs",
+    "check": "node --check app.js && node --check model.js && node --check scripts/serve.cjs && node --check tests/browser-tests.js"
+  }
+}

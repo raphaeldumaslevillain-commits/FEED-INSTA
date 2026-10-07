@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Contrôle responsive · Feed Anekdote</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #eff0f2;
+      }
+      iframe {
+        display: block;
+        border: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <iframe id="viewport" title="Aperçu à la taille de contrôle"></iframe>
+    <script>
+      const params = new URLSearchParams(location.search);
+      const width = Math.max(
+        320,
+        Math.min(1440, Number(params.get("width")) || 1280),
+      );
+      const height = Math.max(
+        600,
+        Math.min(1800, Number(params.get("height")) || 900),
+      );
+      const viewport = document.querySelector("#viewport");
+      viewport.style.width = width + "px";
+      viewport.style.height = height + "px";
+      viewport.src =
+        "../index.html?sandbox=1" +
+        (params.get("reference") === "1" ? "&view=reference" : "");
+      viewport.addEventListener("load", () => {
+        if (params.get("edit") === "1")
+          viewport.contentDocument.querySelector("#editor-toggle").click();
+        document.body.dataset.ready = "true";
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Tests navigateur · Feed Anekdote</title>
+    <style>
+      body {
+        font: 15px system-ui;
+        margin: 24px;
+        background: #f4f5f6;
+      }
+      button {
+        padding: 14px;
+      }
+      iframe {
+        width: 1018px;
+        height: 850px;
+        border: 1px solid #ddd;
+        max-width: 100%;
+      }
+      li {
+        padding: 5px;
+      }
+      .pass {
+        color: #18613c;
+      }
+      .fail {
+        color: #a52d22;
+      }
+    </style>
+    <script src="browser-tests.js" defer></script>
+  </head>
+  <body>
+    <h1>Tests du feed</h1>
+    <button id="run">Exécuter les tests</button>
+    <p id="result" role="status">Prêt.</p>
+    <ol id="results"></ol>
+    <iframe
+      id="app"
+      title="Feed en cours de test"
+      src="../index.html?sandbox=1&amp;view=reference"
+    ></iframe>
+  </body>
+</html>

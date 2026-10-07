@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b0f11" />
+    <title>Anekdote · Feed Instagram</title>
+    <link rel="icon" href="assets/profile.jpg" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="model.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main class="workspace" aria-label="Simulateur de feed Instagram Anekdote">
+      <div class="phone" aria-label="Aperçu iPhone">
+        <img
+          class="phone-bezel"
+          src="assets/device/iphone-bezel.png"
+          alt=""
+          draggable="false"
+        />
+        <div class="phone-screen">
+          <div class="status-bar" aria-hidden="true">
+            <span>9:41</span>
+            <div>
+              <img src="assets/icons/antenna-bars-5.svg" alt="" /><img
+                src="assets/icons/wifi.svg"
+                alt=""
+              /><img src="assets/icons/battery-4.svg" alt="" />
+            </div>
+          </div>
+          <div
+            class="phone-scroll"
+            tabindex="0"
+            aria-label="Faire défiler le profil et ses publications"
+          >
+            <section
+              class="instagram"
+              aria-label="Profil Instagram @anekdotefr"
+            >
+              <header class="profile-header">
+                <div class="profile-summary">
+                  <img
+                    class="profile-avatar"
+                    src="assets/profile.jpg"
+                    alt="Logo Anekdote"
+                    draggable="false"
+                  />
+                  <div class="profile-info">
+                    <div class="username-row">
+                      <h1>anekdotefr</h1>
+                      <img class="icon" src="assets/icons/dots.svg" alt="" />
+                    </div>
+                    <p class="profile-name">Anekdote</p>
+                    <div class="stats">
+                      <span
+                        ><strong id="publication-count">541</strong>
+                        publications</span
+                      ><span><strong>1 686</strong> followers</span
+                      ><span><strong>625</strong> suivi(e)s</span>
+                    </div>
+                    <div class="bio">
+                      <p class="bio-intro">
+                        Agence de conseil en stratégie d'Influence
+                      </p>
+                      <p>
+                        Campagnes fil rouge · Événements · Portages ·<br
+                          class="reference-break"
+                        />
+                        Affiliation · Social Media
+                      </p>
+                      <p class="profile-link">
+                        <img class="icon" src="assets/icons/link.svg" alt="" />
+                        <strong>www.anekdote.fr et 1 de plus</strong>
+                      </p>
+                    </div>
+                    <p class="mutuals">
+                      <img
+                        src="assets/followers.png"
+                        alt=""
+                        draggable="false"
+                      /><span
+                        ><strong>popo.lartiste, antoine_delp</strong> et
+                        <strong>3 autres</strong><br />
+                        personnes suivent</span
+                      >
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="profile-actions"
+                  aria-label="Actions du profil, aperçu visuel"
+                >
+                  <span
+                    >Suivi(e)
+                    <img
+                      class="icon"
+                      src="assets/icons/chevron-down.svg"
+                      alt="" /></span
+                  ><span>Contacter</span
+                  ><span class="add-person"
+                    ><img class="icon" src="assets/icons/user-plus.svg" alt=""
+                  /></span>
+                </div>
+                <div class="stories-window">
+                  <div class="stories" aria-label="Stories à la une">
+                    <figure class="story">
+                      <div class="story-ring">
+                        <img
+                          src="assets/stories/cannes.jpg"
+                          alt="Story Cannes you ?"
+                          draggable="false"
+                        />
+                      </div>
+                      <figcaption>Cannes...</figcaption>
+                    </figure>
+                    <figure class="story">
+                      <div class="story-ring">
+                        <img
+                          src="assets/stories/event.jpg"
+                          alt="Story Events"
+                          draggable="false"
+                        />
+                      </div>
+                      <figcaption>Event</figcaption>
+                    </figure>
+                    <figure class="story">
+                      <div class="story-ring">
+                        <img
+                          src="assets/stories/dbm.jpg"
+                          alt="Story DBM"
+                          draggable="false"
+                        />
+                      </div>
+                      <figcaption>DBM</figcaption>
+                    </figure>
+                    <figure class="story">
+                      <div class="story-ring">
+                        <img
+                          src="assets/stories/team.jpg"
+                          alt="Story Team"
+                          draggable="false"
+                        />
+                      </div>
+                      <figcaption>Team</figcaption>
+                    </figure>
+                    <figure class="story">
+                      <div class="story-ring">
+                        <img
+                          src="assets/stories/umicc.jpg"
+                          alt="Story UMICC"
+                          draggable="false"
+                        />
+                      </div>
+                      <figcaption>UMICC</figcaption>
+                    </figure>
+                    <figure class="story">
+                      <div class="story-ring">
+                        <img
+                          src="assets/stories/tiktok.jpg"
+                          alt="Story Tik Tok"
+                          draggable="false"
+                        />
+                      </div>
+                      <figcaption>Tiktok</figcaption>
+                    </figure>
+                    <figure class="story">
+                      <div class="story-ring">
+                        <img
+                          src="assets/stories/backstage.jpg"
+                          alt="Story Backstage"
+                          draggable="false"
+                        />
+                      </div>
+                      <figcaption>Backst...</figcaption>
+                    </figure>
+                    <figure class="story">
+                      <div class="story-ring">
+                        <img
+                          src="assets/stories/business-trip.jpg"
+                          alt="Story Business trip"
+                          draggable="false"
+                        />
+                      </div>
+                      <figcaption>Business...</figcaption>
+                    </figure>
+                  </div>
+                  <img
+                    class="stories-next icon"
+                    src="assets/icons/square-rounded-chevron-right-filled.svg"
+                    alt=""
+                  />
+                </div>
+              </header>
+              <div
+                class="profile-tabs"
+                aria-label="Vues du profil, aperçu visuel"
+              >
+                <span class="active" aria-label="Publications"
+                  ><img
+                    class="icon"
+                    src="assets/icons/grid-dots.svg"
+                    alt="" /></span
+                ><span aria-label="Reels"
+                  ><img
+                    class="icon"
+                    src="assets/icons/player-play.svg"
+                    alt="" /></span
+                ><span aria-label="Republications"
+                  ><img
+                    class="icon"
+                    src="assets/icons/repeat.svg"
+                    alt="" /></span
+                ><span aria-label="Identifications"
+                  ><img class="icon" src="assets/icons/user-square.svg" alt=""
+                /></span>
+              </div>
+              <div
+                class="post-grid"
+                id="post-grid"
+                aria-label="Six publications du feed"
+              ></div>
+            </section>
+          </div>
+          <div class="bottom-nav" aria-hidden="true">
+            <img class="icon" src="assets/icons/home.svg" alt="" /><img
+              class="icon"
+              src="assets/icons/search.svg"
+              alt=""
+            /><img class="icon" src="assets/icons/square-plus.svg" alt="" /><img
+              class="icon"
+              src="assets/icons/movie.svg"
+              alt=""
+            /><img class="nav-avatar" src="assets/profile.jpg" alt="" />
+          </div>
+          <div class="home-indicator" aria-hidden="true"></div>
+        </div>
+      </div>
+      <aside class="editor" aria-label="Éditeur de composition">
+        <button
+          class="mode-button"
+          id="editor-toggle"
+          type="button"
+          aria-pressed="false"
+          aria-controls="editor-controls"
+        >
+          <img src="assets/icons/pencil.svg" alt="" /><span>mode éditeur</span
+          ><span class="mode-dot" aria-hidden="true"></span>
+        </button>
+        <div id="editor-controls" class="editor-controls" hidden>
+          <div class="editor-heading">
+            <span>COMPOSITION DU FEED</span>
+            <p>Testez votre prochain post.</p>
+          </div>
+          <label class="upload-zone" id="upload-zone" for="image-input"
+            ><img src="assets/icons/upload.svg" alt="" /><strong
+              >Glissez vos images ici</strong
+            ><span>ou choisissez un fichier</span
+            ><small>JPG, PNG, WebP, GIF · 15 Mo max.</small></label
+          >
+          <input
+            class="sr-only"
+            id="image-input"
+            type="file"
+            accept="image/jpeg,image/png,image/webp,image/gif"
+            multiple
+          />
+          <p class="editor-help">
+            Glissez un post sur un autre pour échanger leurs places. Sur mobile,
+            utilisez la poignée.
+          </p>
+          <div class="pin-note">
+            <img src="assets/icons/lock.svg" alt="" /><span
+              >Le premier post reste épinglé.</span
+            >
+          </div>
+          <p class="selection-label" id="selection-label">
+            Sélectionnez un post pour le déplacer.
+          </p>
+          <div class="move-controls">
+            <button
+              type="button"
+              id="move-back"
+              aria-label="Déplacer le post vers la position précédente"
+              disabled
+            >
+              <img src="assets/icons/arrow-left.svg" alt="" /></button
+            ><button
+              type="button"
+              id="move-next"
+              aria-label="Déplacer le post vers la position suivante"
+              disabled
+            >
+              <img src="assets/icons/arrow-right.svg" alt="" /></button
+            ><button
+              type="button"
+              id="remove-post"
+              aria-label="Supprimer le faux post sélectionné"
+              disabled
+            >
+              <img src="assets/icons/trash.svg" alt="" />
+            </button>
+          </div>
+          <div class="editor-footer">
+            <button id="undo" type="button" disabled>Annuler</button
+            ><button id="reset" type="button">Réinitialiser</button>
+          </div>
+          <p class="save-note">
+            Votre composition est enregistrée dans ce navigateur.
+          </p>
+        </div>
+        <p
+          class="editor-status"
+          id="editor-status"
+          role="status"
+          aria-live="polite"
+        ></p>
+      </aside>
+    </main>
+    <noscript
+      >Activez JavaScript pour afficher les publications et utiliser le mode
+      éditeur.</noscript
+    >
+  </body>
+</html>
