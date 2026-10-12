@@ -2,7 +2,13 @@
 
 Reproduction du profil sombre **@anekdotefr**, avec un aperçu iPhone et un éditeur local de composition. HTML, CSS et JavaScript natifs, sans dépendance à installer et sans connexion à Instagram nécessaire pour utiliser la page.
 
-## Ouvrir l’aperçu
+## Version en ligne
+
+[Ouvrir le feed sur GitHub Pages](https://raphaeldumaslevillain-commits.github.io/FEED-INSTA/). Aucun serveur local n’est nécessaire.
+
+GitHub Pages publie automatiquement la racine de la branche `main`. Le fichier `.nojekyll` conserve le site HTML/CSS/JavaScript tel quel. Les imports et compositions restent stockés dans votre navigateur.
+
+## Ouvrir l’aperçu local
 
 Ouvrir `index.html` directement dans un navigateur, ou utiliser Node.js :
 
