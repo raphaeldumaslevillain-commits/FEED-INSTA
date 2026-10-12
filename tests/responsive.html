@@ -35,9 +35,17 @@
         "../index.html?sandbox=1" +
         (params.get("reference") === "1" ? "&view=reference" : "");
       viewport.addEventListener("load", () => {
-        if (params.get("edit") === "1")
-          viewport.contentDocument.querySelector("#editor-toggle").click();
-        document.body.dataset.ready = "true";
+        const ready = () => {
+          const toggle =
+            viewport.contentDocument.querySelector("#editor-toggle");
+          if (!toggle || toggle.disabled) {
+            setTimeout(ready, 20);
+            return;
+          }
+          if (params.get("edit") === "1") toggle.click();
+          document.body.dataset.ready = "true";
+        };
+        ready();
       });
     </script>
   </body>

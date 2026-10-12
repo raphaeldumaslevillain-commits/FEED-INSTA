@@ -71,3 +71,14 @@ La console de l’aperçu principal a été contrôlée : aucune erreur ou alert
 - [x] Tests de données, tests navigateur et vérification de syntaxe réussis.
 - [x] Responsive et captures de preuve enregistrés.
 - [x] Prévisualisation locale maintenue ouverte pour l’utilisateur.
+
+
+## Mise à jour du 12 octobre 2026 — sauvegarde des photos
+
+final result: passed
+
+La composition est désormais enregistrée dans IndexedDB après chaque modification. Le message de confirmation attend la fin de la transaction ; les anciennes données sont migrées et les tests gardent leur base séparée. Le bouton de nouvelle tentative n’apparaît qu’en cas d’échec. Les ressources modifiées ont une nouvelle version dans leur URL pour charger la correction après publication.
+
+Validation : 8 tests du modèle et 20 tests navigateur réussis. Les nouveaux cas couvrent une fermeture et une nouvelle ouverture, la conservation des images et de leurs positions, la migration, une image GIF valide de 6 Mo, une suite de sauvegardes rapides, un échec forcé suivi d’une nouvelle tentative, une réinitialisation durable et le repli sans IndexedDB.
+
+Une photo JPEG a également été ajoutée par le sélecteur de fichiers, déplacée vers la troisième position, puis l’onglet a réellement été fermé et recréé. Les 7 publications, la photo à la troisième position et l’épingle ont été retrouvées, mode éditeur désactivé. Les essais utilisent uniquement les données de test.

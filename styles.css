@@ -957,3 +957,19 @@ body.reference-view {
   padding-bottom: 0;
   width: calc(100% - 5px);
 }
+
+.save-note[data-state="error"] {
+  color: #ac2d20;
+}
+.retry-save {
+  border: 1px solid #dfe1e5;
+  background: #fafafa;
+  border-radius: 7px;
+  padding: 10px;
+  font-size: 11px;
+  margin-top: 10px;
+  min-height: 44px;
+}
+.retry-save:hover {
+  background: #f0f1f3;
+}

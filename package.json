@@ -6,6 +6,6 @@
   "scripts": {
     "dev": "node scripts/serve.cjs",
     "test": "node --test tests/model.test.cjs",
-    "check": "node --check app.js && node --check model.js && node --check scripts/serve.cjs && node --check tests/browser-tests.js"
+    "check": "node --check app.js && node --check model.js && node --check storage.js && node --check scripts/serve.cjs && node --check tests/browser-tests.js"
   }
 }

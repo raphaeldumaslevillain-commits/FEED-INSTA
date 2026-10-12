@@ -6,9 +6,10 @@
     <meta name="theme-color" content="#0b0f11" />
     <title>Anekdote · Feed Instagram</title>
     <link rel="icon" href="assets/profile.jpg" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=2" />
     <script src="model.js" defer></script>
-    <script src="app.js" defer></script>
+    <script src="storage.js?v=2" defer></script>
+    <script src="app.js?v=2" defer></script>
   </head>
   <body>
     <main class="workspace" aria-label="Simulateur de feed Instagram Anekdote">
@@ -305,10 +306,18 @@
             <button id="undo" type="button" disabled>Annuler</button
             ><button id="reset" type="button">Réinitialiser</button>
           </div>
-          <p class="save-note">
-            Votre composition est enregistrée dans ce navigateur.
+          <p
+            class="save-note"
+            id="save-status"
+            role="status"
+            aria-live="polite"
+          >
+            Chargement de votre composition…
           </p>
         </div>
+        <button id="retry-save" class="retry-save" type="button" hidden>
+          Réessayer la sauvegarde
+        </button>
         <p
           class="editor-status"
           id="editor-status"

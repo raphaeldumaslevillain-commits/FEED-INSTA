@@ -30,7 +30,9 @@ L’aperçu est alors disponible sur `http://127.0.0.1:4173`. Pour choisir un au
 - Seuls les faux posts importés peuvent être supprimés. **Annuler** restaure la dernière opération ; **Réinitialiser** restaure les six posts d’origine et peut aussi être annulé.
 - Désactiver le mode éditeur pour retrouver l’aperçu. Les stories et les posts conservent leur survol, sans ouvrir de contenu ou naviguer vers Instagram.
 
-La composition et les images importées sont enregistrées dans le stockage local du navigateur, sans envoi vers un serveur. Le mode éditeur reste désactivé lors d’un nouveau chargement. Si le stockage est indisponible ou plein, le panneau l’indique et la composition reste utilisable en mémoire pendant la session.
+Chaque import, déplacement, suppression et réinitialisation déclenche une sauvegarde automatique des photos et de leur ordre dans IndexedDB, sur le même navigateur et le même appareil, sans envoi vers un serveur. Les images reviennent après fermeture puis réouverture du site, et le mode éditeur reste désactivé lors du chargement. Les anciennes sauvegardes sont reprises automatiquement.
+
+Le panneau indique « Enregistrement… », puis confirme la sauvegarde seulement quand elle est terminée. Si elle échoue, un bouton permet de réessayer et le navigateur avertit avant de quitter avec des modifications non enregistrées. Un échec de lecture ne remplace pas la sauvegarde existante. La protection contre l’effacement automatique du stockage est demandée aux navigateurs compatibles ; le navigateur garde le contrôle de cette autorisation. En navigation privée ou après effacement volontaire des données du site, les données ne peuvent pas être conservées. Si IndexedDB est indisponible, un repli sur le stockage simple du navigateur est utilisé, avec une capacité limitée.
 
 Formats acceptés : JPEG, PNG, WebP et GIF, jusqu’à 15 Mo par image, 20 fichiers par import et 100 posts au total. Les images fixes sont optimisées à 1600 px maximum ; les GIF sont conservés. Les nouveaux posts utilisent le même cadrage central au format 3:4 que la grille.
 
@@ -50,7 +52,7 @@ npm run check
 ```
 
 - 8 tests des invariants : échange, épingle, insertions multiples, suppression, restauration et données sauvegardées invalides.
-- `http://127.0.0.1:4173/tests/browser.html` : 13 tests exécutés dans le navigateur, avec de vrais fichiers et événements de drag-and-drop. Ils utilisent un stockage **séparé** de la composition de l’utilisateur.
+- `http://127.0.0.1:4173/tests/browser.html` : 20 tests exécutés dans le navigateur, notamment fermeture et réouverture, migration des anciennes données, photo de plus de 5 Mo, écritures rapides et nouvelle tentative après échec, avec de vrais fichiers et événements de drag-and-drop. Ils utilisent un stockage **séparé** de la composition de l’utilisateur.
 - `tests/responsive.html?width=375&height=900` : rendu dans une fenêtre de test de taille fixe. `edit=1` ouvre l’éditeur ; `reference=1` affiche la référence sans cadre. Cette page utilise également le stockage de test.
 - Le rapport `design-qa.md` décrit les comparaisons visuelles et les limites vérifiées.
 
@@ -59,7 +61,8 @@ npm run check
 - `index.html` : profil, stories, cadre et panneau d’édition.
 - `styles.css` : reproduction visuelle, survols et adaptation aux écrans.
 - `model.js` : données initiales et règles de déplacement qui protègent l’épingle.
-- `app.js` : imports, drag-and-drop, commandes au clavier, annulation et sauvegarde.
+- `app.js` : imports, drag-and-drop, commandes au clavier, annulation et état de sauvegarde.
+- `storage.js` : enregistrements atomiques dans IndexedDB, migration des anciennes compositions et repli en cas d’indisponibilité.
 - `scripts/serve.cjs` : serveur local pour l’aperçu et les tests.
 
 Les visuels et marques Anekdote/Instagram conservent les droits de leurs propriétaires. Voir `assets/CREDITS.md` pour les sources des assets et les licences des icônes.

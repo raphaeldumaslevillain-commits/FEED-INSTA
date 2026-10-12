@@ -2,10 +2,9 @@
   "use strict";
   const model = window.FeedModel;
   const params = new URLSearchParams(window.location.search);
-  const storageKey =
-    params.get("sandbox") === "1"
-      ? "anekdote-feed-sandbox-v1"
-      : "anekdote-feed-v1";
+  const storage = window.FeedStorage.create({
+    sandbox: params.get("sandbox") === "1",
+  });
   const grid = document.querySelector("#post-grid");
   const toggle = document.querySelector("#editor-toggle");
   const controls = document.querySelector("#editor-controls");
@@ -18,6 +17,10 @@
   const removeButton = document.querySelector("#remove-post");
   const undoButton = document.querySelector("#undo");
   const saveNote = document.querySelector(".save-note");
+  const retrySave = document.querySelector("#retry-save");
+  let saveVersion = 0;
+  let dirty = false;
+  let ready = false;
   let posts = model.fresh();
   let editing = false;
   let selectedId = null;
@@ -28,27 +31,52 @@
   const history = [];
   if (new URLSearchParams(window.location.search).get("view") === "reference")
     document.body.classList.add("reference-view");
-  try {
-    const saved = window.localStorage.getItem(storageKey);
-    if (saved) posts = model.restore(JSON.parse(saved));
-  } catch (_) {
-    saveNote.textContent =
-      "La composition reste disponible pendant cette session.";
-  }
   function announce(message, error = false) {
     status.textContent = message;
     status.classList.toggle("error", error);
   }
-  function save() {
-    try {
-      window.localStorage.setItem(storageKey, JSON.stringify(posts));
-      saveNote.textContent =
-        "Votre composition est enregistrée dans ce navigateur.";
-    } catch (_) {
-      saveNote.textContent =
-        "Stockage indisponible ou plein : cette composition reste en mémoire jusqu’à la fermeture de la page.";
-    }
+  function savedNote(backend) {
+    retrySave.textContent = "Réessayer la sauvegarde";
+    saveNote.dataset.state = "saved";
+    saveNote.textContent =
+      backend === "indexeddb"
+        ? "Photos et composition enregistrées. Vous les retrouverez à la prochaine ouverture dans ce navigateur."
+        : "Composition enregistrée dans ce navigateur. Le stockage des photos est limité ici.";
+    retrySave.hidden = true;
   }
+  function save() {
+    const version = ++saveVersion;
+    dirty = true;
+    saveNote.dataset.state = "saving";
+    saveNote.textContent = "Enregistrement des photos et de la composition…";
+    retrySave.hidden = true;
+    return storage
+      .save(posts)
+      .then((result) => {
+        if (version !== saveVersion) return;
+        dirty = false;
+        savedNote(result.backend);
+      })
+      .catch(() => {
+        if (version !== saveVersion) return;
+        saveNote.dataset.state = "error";
+        saveNote.textContent =
+          "Sauvegarde impossible. Gardez cette page ouverte et réessayez pour conserver vos modifications.";
+        retrySave.hidden = false;
+        announce(
+          "Vos dernières modifications n’ont pas encore pu être enregistrées.",
+          true,
+        );
+      });
+  }
+  retrySave.addEventListener("click", () =>
+    ready ? save() : loadComposition(),
+  );
+  window.addEventListener("beforeunload", (event) => {
+    if (!dirty) return;
+    event.preventDefault();
+    event.returnValue = "";
+  });
   function icon(name, className = "") {
     const image = document.createElement("img");
     image.src = `assets/icons/${name}.svg`;
@@ -484,5 +512,46 @@
   grid.addEventListener("pointercancel", clearDrag);
   window.addEventListener("blur", clearDrag);
   input.disabled = true;
+  toggle.disabled = true;
+  grid.setAttribute("aria-busy", "true");
+  saveNote.dataset.state = "loading";
   render();
+  function loadComposition() {
+    toggle.disabled = true;
+    retrySave.hidden = true;
+    grid.setAttribute("aria-busy", "true");
+    return storage
+      .load()
+      .then(async (result) => {
+        if (result.posts) posts = model.restore(result.posts);
+        render();
+        ready = true;
+        if (result.posts) announce("Votre composition a été restaurée.");
+        if (result.migrate) await save();
+        else if (result.backend === "memory") {
+          saveNote.dataset.state = "error";
+          saveNote.textContent =
+            "Le stockage est indisponible. Gardez cette page ouverte pour conserver vos modifications.";
+          announce(
+            "Le navigateur ne permet pas de sauvegarder votre composition.",
+            true,
+          );
+          retrySave.hidden = false;
+        } else savedNote(result.backend);
+        toggle.disabled = false;
+      })
+      .catch(() => {
+        saveNote.dataset.state = "error";
+        saveNote.textContent =
+          "Impossible de charger votre sauvegarde. Réessayez pour retrouver vos photos.";
+        announce(
+          "Votre sauvegarde n’a pas pu être chargée. Elle n’a pas été remplacée.",
+          true,
+        );
+        retrySave.textContent = "Réessayer le chargement";
+        retrySave.hidden = false;
+      })
+      .finally(() => grid.setAttribute("aria-busy", "false"));
+  }
+  loadComposition();
 })();
